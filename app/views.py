@@ -1,4 +1,4 @@
-from blog import app
+from app import app
 from models import RecommenderUser
 from forms import AddUserForm
 from decorators import login_required
