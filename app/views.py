@@ -42,8 +42,8 @@ def remove_user():
 			result.delete()
 		return redirect(url_for('manage_users'))
 
-@app.route('/search_results', methods = ['GET','POST'])
-def group_search():
+@app.route('/recommender_results', methods = ['GET','POST'])
+def group_recommend():
 	form = RecommenderForm()
 	if form.validate_on_submit():
 		recommender_users = RecommenderUser.all()
@@ -56,4 +56,4 @@ def group_search():
 		recommender.populate_users(users_for_search, recommender_to_use)		
 		results = recommender.generate_movie_list()
 		
-		return render_template('search_results.html', movies_returned=results)
+		return render_template('recommender_results.html', movies_returned=results)
