@@ -9,6 +9,7 @@
 			<a href="{{ url_for('list_users') }}">List users in recommender queue</a>
 			| <a href="{{ url_for('add_recommender_user') }}">Add users to recommender queue</a>
 			| <a href="{{ url_for('remove_user') }}">Remove users from recommender queue</a>
+			| <a href="{{ url_for('group_search') }}">Search based on users</a>
 		</p>
         {% with messages = get_flashed_messages() %}
             {% if messages %}

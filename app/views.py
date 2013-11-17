@@ -1,11 +1,10 @@
 from app import app
 from google.appengine.ext import db
 from models import RecommenderUser
+from movie_recommender import MovieRecommender
 from forms import UserForm
 from decorators import login_required
-
 from flask import render_template, flash, url_for, redirect
-
 from google.appengine.api import users
 
 @app.route('/')
@@ -39,3 +38,16 @@ def remove_user():
 			result.delete()
 		return redirect(url_for('list_users'))
 	return render_template('remove_user.html', form=form)
+
+@app.route('/search_results')
+def group_search():
+	recommender_users = RecommenderUser.all()
+	users_for_search = []
+	for user in recommender_users:
+		users_for_search.append(user.username)
+	
+	recommender = MovieRecommender()
+	recommender.populate_users(users_for_search)
+	results = recommender.generate_movie_list()
+	
+	return render_template('search_results.html', movies_returned=results)

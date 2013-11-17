@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+	<h1 id="">Search results list</h1>
+	{% for movie in movies_returned %}
+	<li>
+		{{ movie }}
+	</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
