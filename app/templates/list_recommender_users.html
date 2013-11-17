@@ -2,11 +2,12 @@
 
 {% block content %}
 <ul>
-    <h1 id="">Users in the recommender list</h1>
-    {% for recommender_user in recommender_users %}
-    <li>
-        {{ recommender_user.username }}
-    </li>
-    {% endfor %}
+	<h1 id="">Users in the recommender list</h1>
+	{% for recommender_user in recommender_users %}
+	<li>
+		{{ recommender_user.username }}
+	</li>
+	{% endfor %}
 </ul>
+
 {% endblock %}
