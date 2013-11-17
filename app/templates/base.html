@@ -6,8 +6,7 @@
     <body id="">
 
         <p>
-			<a href="{{ url_for('list_users') }}">Manage users in recommender queue</a>
-			| <a href="{{ url_for('group_search') }}">Search based on users</a>
+			<a href="{{ url_for('manage_users') }}">Home Page/Manage Users</a>
 		</p>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
