@@ -14,7 +14,7 @@ class PostForm(wtf.Form):
 	content = wtf.TextAreaField('Content', validators=[validators.Required()])
 	
 class AddUserForm(wtf.Form):
-	username = wtf.TextField('Name', validators=[validators.Required()])
+	username = wtf.TextField('User Name', validators=[validators.Required()])
 
 #Default pages/routes with template
 @app.route('/')
@@ -44,3 +44,17 @@ def new_post():
 def list_users():
 	recommender_users = RecommenderUser.all()
 	return render_template('list_recommender_users.html', recommender_users = recommender_users)
+
+@app.route('/add_recommender_user', methods = ['GET', 'POST'])
+def add_recommender_user():
+	form = AddUserForm()
+	if form.validate_on_submit():
+		recommenderuser = RecommenderUser(username = form.username.data)
+		
+		recommenderuser.put()
+		flash('New user added to list')
+		return redirect(url_for('list_users'))
+		
+	return render_template('new_user.html', form=form)
+
+	

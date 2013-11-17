@@ -9,8 +9,8 @@
 			<a href="{{ url_for('list_posts') }}">List posts</a> 
 			| <a href="{{ url_for('new_post') }}">New post</a>
 			| <a href="{{ url_for('list_users') }}">List users in recommender queue</a>
+			| <a href="{{ url_for('add_recommender_user') }}">Add users to recommender queue</a>
 		</p>
-
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="flash">
