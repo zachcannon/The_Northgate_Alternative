@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+	<h1 id="">Users in the recommender list</h1>
+	{% for recommender_user in recommender_users %}
+	<li>
+		{{ recommender_user.username }}
+	</li>
+	{% endfor %}
+</ul>
+
+<h1 id="">Add new user</h1>
+    <form action="{{ url_for('add_recommender_user') }}" method="post" accept-charset="utf-8">
+        {{ form.csrf_token }}
+		<p>
+            <label for="username">{{ form.username.label }}</label><br />
+            {{ form.username|safe }}<br />
+			
+            {% if form.username.errors %}
+            <ul class="errors">
+                {% for error in form.username.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </p>
+        <p><input type="submit" value="Add User"/></p>
+    </form>
+	
+<h1 id="">Remove User</h1>
+    <form action="{{ url_for('remove_user') }}" method="post" accept-charset="utf-8">
+        {{ form.csrf_token }}
+		<p>
+            <label for="username">{{ form.username.label }}</label><br />
+            {{ form.username|safe }}<br />
+			
+            {% if form.username.errors %}
+            <ul class="errors">
+                {% for error in form.username.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </p>
+        <p><input type="submit" value="Remove User"/></p>
+    </form>
+
+{% endblock %}

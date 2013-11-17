@@ -11,10 +11,11 @@ from google.appengine.api import users
 def redirect_to_home():
 	return redirect(url_for('list_users'))
 	
-@app.route('/list_users', methods = ['GET', 'POST'])
+@app.route('/list_users')
 def list_users():			
 	recommender_users = RecommenderUser.all()
-	return render_template('list_recommender_users.html', recommender_users = recommender_users)
+	form = UserForm()
+	return render_template('manage_users.html', recommender_users = recommender_users, form=form)
 
 @app.route('/add_recommender_user', methods = ['GET', 'POST'])
 def add_recommender_user():
@@ -22,10 +23,8 @@ def add_recommender_user():
 	if form.validate_on_submit():
 		recommenderuser = RecommenderUser(username = form.username.data)		
 		recommenderuser.put()
-		flash('New user added to list')
+		flash('New user ' +form.username.data+ ' added to list')
 		return redirect(url_for('list_users'))
-		
-	return render_template('new_user.html', form=form)
 
 @app.route('/remove_user', methods = ['GET', 'POST'])
 def remove_user():
@@ -37,7 +36,6 @@ def remove_user():
 			flash('Removing ' + result.username + ' from the db.')
 			result.delete()
 		return redirect(url_for('list_users'))
-	return render_template('remove_user.html', form=form)
 
 @app.route('/search_results')
 def group_search():
