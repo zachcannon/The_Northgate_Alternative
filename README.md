@@ -8,5 +8,5 @@ Hosted by the Google App Engine.
 URL: http://(the name of this repository, minus the '_').appspot.com
 
 
-This project was started by using the GoogleAppEngine Flask Template found at: https://github.com/tghw/gae-flask-template
-Many thanks to tghw for this awesome template!! 
+This project was started by using the GoogleAppEngine Flask Template found at: https://github.com/fsouza/gaeseries/tree/flask
+Many thanks to fsouza for this awesome template!! 
