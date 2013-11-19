@@ -35,6 +35,7 @@ def add_recommender_user():
 def remove_user():
 	form = UserForm()	
 	if form.validate_on_submit():
+		#shy away from queries and go towards ORM framework
 		q = db.GqlQuery("SELECT * FROM RecommenderUser where username = :1", form.username.data)
 		results = q.fetch(10)
 		for result in results:

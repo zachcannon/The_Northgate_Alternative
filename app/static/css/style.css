@@ -1,0 +1,43 @@
+.sidebar {
+	border: 1px solid;
+	border-radius: 10px;
+	background-color: GhostWhite;
+}
+
+.pagebody {
+	border: 1px solid;
+	border-radius: 10px;
+	background-color: Gainsboro;
+}
+
+.pagebase {
+	background-color: Maroon;
+}
+
+.pageheader {
+	border: 1px solid;
+	border-radius: 10px;
+	background-color: GhostWhite;
+	padding-left: 20px;
+}
+
+.formpiece {
+	padding-left: 15px;
+}
+
+.listpiece {
+	padding-left: 30px;
+}
+
+#tipsandtricksbox {
+	margin-bottom: 10px;
+	padding-top: 5px;
+	border: 1px solid;
+	border-radius: 10px;
+	background-color: White;
+}
+
+#returntohomepagelink {
+	font-size: 20px;
+	font-weight: bold;
+}
