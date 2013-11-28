@@ -51,7 +51,7 @@ def group_recommend():
 		recommender_to_use = form.recommendertype.data
 		users_for_search = []
 		for user in recommender_users:
-			users_for_search.append(user.username)
+			users_for_search.append(int(user.username))
 		
 		recommender = MovieRecommender()
 		recommender.populate_users(users_for_search, recommender_to_use)		

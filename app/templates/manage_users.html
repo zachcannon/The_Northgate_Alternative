@@ -4,7 +4,17 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span3 sidebar text-center">
-			<h3 class="formpiece" >Add new user</h1>
+			
+			<h3 class="formpiece" id="">Users in the recommender list</h3>
+			<ul class="listpiece">
+				{% for recommender_user in recommender_users %}
+				<li>
+					{{ recommender_user.username }}
+				</li>
+				{% endfor %}
+			</ul>
+			
+			<h3 class="formpiece" >Add new user</h3>
 			<form class="formpiece" action="{{ url_for('add_recommender_user') }}" method="post" accept-charset="utf-8">
 				{{ form.csrf_token }}
 				<p>
@@ -22,7 +32,7 @@
 				<p><input type="submit" value="Add User"/></p>
 			</form>
 		
-			<h3 class="formpiece" >Remove User</h1>
+			<h3 class="formpiece" >Remove User</h3>
 			<form class="formpiece" action="{{ url_for('remove_user') }}" method="post" accept-charset="utf-8">
 				{{ form.csrf_token }}
 				<p>
@@ -48,14 +58,6 @@
 		</div>
 		
 		<div class="span9 pagebody">
-			<h2 class="formpiece" id="">Users in the recommender list</h1>
-			<ul class="listpiece">
-				{% for recommender_user in recommender_users %}
-				<li>
-					{{ recommender_user.username }}
-				</li>
-				{% endfor %}
-			</ul>
 			
 			<h2 class=" text-center" >Generate Recommendation List</h1>
 			<form class="formpiece text-center" action="{{ url_for('group_recommend') }}" method="post" accept-charset="utf-8">
