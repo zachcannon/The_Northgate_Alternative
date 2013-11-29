@@ -3,14 +3,14 @@
 {% block content %}
 <div class="container-fluid">
 	<div class="row-fluid">
-		<div class="span3 sidebar text-center">
+		<div class="span4 sidebar text-center">
 			
 			<h3 class="formpiece" id="">Users in the recommender list</h3>
 			<ul class="listpiece">
 				{% for recommender_user in recommender_users %}
-				<li>
-					{{ recommender_user.username }}
+				<li>					
 					<form action="{{ url_for('remove_user') }}" method="post">
+						{{ recommender_user.username|safe }}
 						{{ remove_user_form.usertodelete(value=recommender_user.username)|safe }}
 						<input type="submit" value="X"></input>
 					</form>
@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		
-		<div class="span9 pagebody">
+		<div class="span8 pagebody">
 			
 			<h2 class=" text-center" >Generate Recommendation List</h1>
 			<form class="formpiece text-center" action="{{ url_for('group_recommend') }}" method="post" accept-charset="utf-8">

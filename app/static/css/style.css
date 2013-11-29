@@ -29,6 +29,10 @@
 	padding-left: 30px;
 }
 
+ul {
+    list-style-type: none;
+}
+
 #tipsandtricksbox {
 	margin-bottom: 10px;
 	padding-top: 5px;
