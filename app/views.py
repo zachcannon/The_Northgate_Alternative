@@ -2,10 +2,9 @@ from app import app
 from google.appengine.ext import db
 from models import RecommenderUser
 from movie_recommender import MovieRecommender
-from forms import UserForm
-from forms import RecommenderForm
+from forms import UserForm, RecommenderForm, RemoveUserForm
 from decorators import login_required
-from flask import render_template, flash, url_for, redirect
+from flask import render_template, flash, url_for, redirect, request
 from google.appengine.api import users
 
 @app.route('/')
@@ -16,11 +15,14 @@ def redirect_to_home():
 def manage_users():			
 	recommender_users = RecommenderUser.all()
 	form = UserForm()
+	remove_user_form = RemoveUserForm()
 	recommender_form = RecommenderForm()
+	
 	return render_template('manage_users.html', 
 		recommender_users = recommender_users, 
 		form=form,
-		recommender_form=recommender_form)
+		recommender_form=recommender_form,
+		remove_user_form=remove_user_form)
 
 @app.route('/add_recommender_user', methods = ['GET', 'POST'])
 def add_recommender_user():
@@ -31,12 +33,14 @@ def add_recommender_user():
 		flash('New user ' +form.username.data+ ' added to list')
 		return redirect(url_for('manage_users'))
 
-@app.route('/remove_user', methods = ['GET', 'POST'])
-def remove_user():
-	form = UserForm()	
-	if form.validate_on_submit():
-		#shy away from queries and go towards ORM framework
-		q = db.GqlQuery("SELECT * FROM RecommenderUser where username = :1", form.username.data)
+@app.route('/remove_user', methods = ['POST'])
+def remove_user():		
+	form = RemoveUserForm()
+	flash('MADE IT IN!')
+	if request.method == 'POST':
+		flash(form.usertodelete.data)
+		#Long Mai states: Shy away from direct text queries, GOD DAMN IT!
+		q = db.GqlQuery("SELECT * FROM RecommenderUser where username = :1", form.usertodelete.data)
 		results = q.fetch(10)
 		for result in results:
 			flash('Removing ' + result.username + ' from the db.')
