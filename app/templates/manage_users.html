@@ -35,6 +35,14 @@
 				</p>
 				<p><input type="submit" value="Add User"/></p>
 			</form>
+			
+			<h3 class="formpiece" >Recommender To Use</h3>
+			<form class="formpiece text-center">
+				<select id="recommenderstouse">
+					<option value="recommender1" selected>Safe Recommender</option>
+					<option value="recommender2">Swing for the fences</option>
+				</select>
+			</form>
 
 			<div id="tipsandtricksbox" class="formpiece">
 				<p>Information here</p>
@@ -46,22 +54,11 @@
 		<div class="span8 pagebody">
 			
 			<h2 class=" text-center" >Generate Recommendation List</h1>
-			<form class="formpiece text-center" action="{{ url_for('group_recommend') }}" method="post" accept-charset="utf-8">
-				{{ recommender_form.csrf_token }}
-				<p>
-					<label for="recommendertype">{{ recommender_form.recommendertype.label }}</label><br />
-					{{ recommender_form.recommendertype|safe }}<br />
-					
-					{% if recommender_form.recommendertype.errors %}
-					<ul class="errors">
-						{% for error in recommender_form.recommendertype.errors %}
-						<li>{{ error }}</li>
-						{% endfor %}
-					</ul>
-					{% endif %}
-				</p>
-				<p><input type="submit" value="Generate Recommendation List"/></p>
-			</form>
+			
+			<ul id="movieList"></ul>
+			
+			<button id="generateMovieList"> Generate Some Movies!! </button>
+			
 		</div>
 	</div>
 </div>

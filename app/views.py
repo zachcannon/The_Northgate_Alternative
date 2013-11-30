@@ -2,9 +2,9 @@ from app import app
 from google.appengine.ext import db
 from models import RecommenderUser
 from movie_recommender import MovieRecommender
-from forms import UserForm, RecommenderForm, RemoveUserForm
+from forms import UserForm, RemoveUserForm
 from decorators import login_required
-from flask import render_template, flash, url_for, redirect, request
+from flask import render_template, flash, url_for, redirect, request, jsonify
 from google.appengine.api import users
 
 @app.route('/')
@@ -16,12 +16,10 @@ def manage_users():
 	recommender_users = RecommenderUser.all()
 	form = UserForm()
 	remove_user_form = RemoveUserForm()
-	recommender_form = RecommenderForm()
 	
 	return render_template('manage_users.html', 
 		recommender_users = recommender_users, 
 		form=form,
-		recommender_form=recommender_form,
 		remove_user_form=remove_user_form)
 
 @app.route('/add_recommender_user', methods = ['GET', 'POST'])
@@ -47,18 +45,14 @@ def remove_user():
 			result.delete()
 		return redirect(url_for('manage_users'))
 
-@app.route('/recommender_results', methods = ['GET','POST'])
+@app.route('/recommender_results', methods = ['POST'])
 def group_recommend():
-	form = RecommenderForm()
-	if form.validate_on_submit():
-		recommender_users = RecommenderUser.all()
-		recommender_to_use = form.recommendertype.data
-		users_for_search = []
-		for user in recommender_users:
-			users_for_search.append(int(user.username))
-		
-		recommender = MovieRecommender()
-		recommender.populate_users(users_for_search, recommender_to_use)		
-		results = recommender.generate_movie_list()
-		
-		return render_template('recommender_results.html', movies_returned=results)
+	recommender_users = RecommenderUser.all()
+	recommender_to_use = request.form['recommender']
+	users_for_search = []
+	for user in recommender_users:
+		users_for_search.append(int(user.username))	
+	recommender = MovieRecommender()
+	recommender.populate_users(users_for_search, recommender_to_use)		
+	results = recommender.generate_movie_list()
+	return jsonify({'movies': results})

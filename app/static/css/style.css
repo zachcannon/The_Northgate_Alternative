@@ -33,6 +33,11 @@ ul {
     list-style-type: none;
 }
 
+#generateMovieList {
+	position: relative;
+	left: 43%;
+}
+
 #tipsandtricksbox {
 	margin-bottom: 10px;
 	padding-top: 5px;

@@ -7,6 +7,3 @@ class RemoveUserForm(wtf.Form):
 class UserForm(wtf.Form):
 	username = wtf.TextField('User Name', validators=[validators.Required()])
 	
-class RecommenderForm(wtf.Form):
-	recommendertype = wtf.SelectField('Select a recommender to use...',
-		choices=[('recommender1','Recommender 1'),('recommender2','Recommender 2')])
