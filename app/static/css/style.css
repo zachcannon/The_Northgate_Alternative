@@ -1,12 +1,12 @@
 .sidebar {
 	border: 1px solid;
-	border-radius: 10px;
+	border-radius: 3px;
 	background-color: GhostWhite;
 }
 
 .pagebody {
 	border: 1px solid;
-	border-radius: 10px;
+	border-radius: 3px;
 	background-color: Gainsboro;
 }
 
@@ -16,7 +16,7 @@
 
 .pageheader {
 	border: 1px solid;
-	border-radius: 10px;
+	border-radius: 3px;
 	background-color: GhostWhite;
 	padding-left: 20px;
 }
@@ -45,7 +45,7 @@
 	font-weight: bold;
 }
 
-.preformed-user-list {
+.preformed-group-button {
 	font-weight: bold;
 }
 

@@ -21,5 +21,23 @@ $( document ).ready(function() {
 			group: '[1000, 1001]'
 		});	
 	});
+	
+	$('#js-test-group-two').click(function () {
+		$.post('/load_preformed_group', {
+			group: '[1006, 1003, 1004]'
+		});	
+	});
+	
+	$('#js-test-group-three').click(function () {
+		$.post('/load_preformed_group', {
+			group: '[86, 652, 1006]'
+		});	
+	});
+	
+	$('#js-test-group-four').click(function () {
+		$.post('/load_preformed_group', {
+			group: '[450, 243]'
+		});	
+	});
 
 });
