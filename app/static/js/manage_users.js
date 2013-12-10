@@ -21,7 +21,7 @@ $( document ).ready(function() {
 	$('#js-test-group-one').click(function () {
 		$.post('/load_preformed_group', {
 			group: '[44,55,66]'
-		});
+		});	
 	});
 
 });

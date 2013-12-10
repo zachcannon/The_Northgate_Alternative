@@ -36,8 +36,6 @@ def add_preformed_group():
 		for member in group_members_list:
 			recommenderuser = RecommenderUser(username = str(member))
 			recommenderuser.put()
-		
-		return redirect(url_for('manage_users'))
 
 @app.route('/add_recommender_user', methods = ['GET', 'POST'])
 def add_recommender_user():

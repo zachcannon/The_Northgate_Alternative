@@ -42,6 +42,7 @@
 .movie-list-item {
 	height: 50px;
 	font-size: xx-large;
+	font-weight: bold;
 }
 
 ul {
