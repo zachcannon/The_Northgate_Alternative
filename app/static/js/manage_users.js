@@ -7,8 +7,9 @@ $( document ).ready(function() {
 	
 		var postMovieList = function(movies) {
 			$('#movieList').empty();
+			$('#movieList').append('<li class="nav-header">Search Results</li>');
 			$.each( movies['movies'], function(index, value) {
-				$('#movieList').append('<li>'+value+'</li>');				
+				$('#movieList').append('<li><a href="https://www.google.com/search?q='+value+'" target="_blank"">'+value+'</a></li>');				
 			});
 		};
 		

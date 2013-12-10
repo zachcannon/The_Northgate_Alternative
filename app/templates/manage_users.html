@@ -12,14 +12,14 @@
 					<form action="{{ url_for('remove_user') }}" method="post">
 						{{ recommender_user.username|safe }}
 						{{ remove_user_form.usertodelete(value=recommender_user.username)|safe }}
-						<input type="submit" value="X"></input>
+						<input type="submit" class='btn btn-danger' value="X"></input>
 					</form>
 				</li>
 				{% endfor %}
 			</ul>
 			
 			<h3 class="formpiece" >Add new user</h3>
-			<form class="formpiece" action="{{ url_for('add_recommender_user') }}" method="post" accept-charset="utf-8">
+			<form class="formpiece form-search" action="{{ url_for('add_recommender_user') }}" method="post" accept-charset="utf-8">
 				{{ form.csrf_token }}
 				<p>
 					<label for="username">{{ form.username.label }}</label><br />
@@ -33,7 +33,7 @@
 					</ul>
 					{% endif %}
 				</p>
-				<p><input type="submit" value="Add User"/></p>
+				<p><input type="submit" class="search-query"value="Add User"/></p>
 			</form>
 			
 			<h3 class="formpiece" >Recommender To Use</h3>
@@ -53,11 +53,13 @@
 		
 		<div class="span8 pagebody">
 			
-			<h2 class=" text-center" >Generate Recommendation List</h1>
+			<h2 class=" text-center" >Movie Recommendation List</h1>
 			
-			<ul id="movieList"></ul>
+			<ul id="movieList" class='nav nav-list'>
+				<li class='active'><a href='#'>...NO MOVIES IN LIST YET...</a></li>
+			</ul>
 			
-			<button id="generateMovieList"> Generate Some Movies!! </button>
+			<button id="generateMovieList" class='btn btn-success btn-lg'> Generate Some Movies!! </button>
 			
 		</div>
 	</div>

@@ -11,7 +11,7 @@
 }
 
 .pagebase {
-	background-color: Maroon;
+	background-image: url('../app_background.jpg');
 }
 
 .pageheader {
@@ -29,13 +29,14 @@
 	padding-left: 30px;
 }
 
-ul {
-    list-style-type: none;
+.btn {
+	margin: 3px;
+	width: 98%;
 }
 
-#generateMovieList {
-	position: relative;
-	left: 43%;
+ul {
+    list-style-type: none;
+	text-align: center;
 }
 
 #tipsandtricksbox {
