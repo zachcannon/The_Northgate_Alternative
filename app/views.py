@@ -22,6 +22,23 @@ def manage_users():
 		form=form,
 		remove_user_form=remove_user_form)
 
+@app.route('/load_preformed_group', methods = ['POST'])	
+def add_preformed_group():
+	if request.method == 'POST':	
+		q = db.GqlQuery("SELECT * FROM RecommenderUser")
+		results = q.fetch(15)
+		for result in results:
+			flash('Removing ' + result.username + ' from the db.')
+			result.delete()
+			
+		group_members = request.form['group']
+		group_members_list = eval(group_members)
+		for member in group_members_list:
+			recommenderuser = RecommenderUser(username = str(member))
+			recommenderuser.put()
+		
+		return redirect(url_for('manage_users'))
+
 @app.route('/add_recommender_user', methods = ['GET', 'POST'])
 def add_recommender_user():
 	form = UserForm()

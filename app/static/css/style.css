@@ -34,6 +34,16 @@
 	width: 98%;
 }
 
+.remove-user-button {
+	position: relative;
+	top: -5px;
+}
+
+.movie-list-item {
+	height: 50px;
+	font-size: xx-large;
+}
+
 ul {
     list-style-type: none;
 	text-align: center;

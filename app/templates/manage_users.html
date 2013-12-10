@@ -10,9 +10,9 @@
 				{% for recommender_user in recommender_users %}
 				<li>					
 					<form action="{{ url_for('remove_user') }}" method="post">
-						{{ recommender_user.username|safe }}
+						<span style='font-size: x-large'>{{ recommender_user.username|safe }}</span>
 						{{ remove_user_form.usertodelete(value=recommender_user.username)|safe }}
-						<input type="submit" class='btn btn-danger' value="X"></input>
+						<input type="submit" class='btn btn-danger remove-user-button' value="X"></input>
 					</form>
 				</li>
 				{% endfor %}
@@ -45,9 +45,10 @@
 			</form>
 
 			<div id="tipsandtricksbox" class="formpiece">
-				<p>Information here</p>
-				<p>Grouping Ideas</p>
-				<p>Users and their genres</p>
+				<p>Preformed Groups for Demo Purposes</p>
+				<ul class='nav nav-list'>
+					<li><button id='js-test-group-one' class='btn btn-info'>Users: 55, 66, 77 - Genres: Action, Mystery, Romance</button></li>
+				</ul>
 			</div>
 		</div>
 		
@@ -59,7 +60,7 @@
 				<li class='active'><a href='#'>...NO MOVIES IN LIST YET...</a></li>
 			</ul>
 			
-			<button id="generateMovieList" class='btn btn-success btn-lg'> Generate Some Movies!! </button>
+			<button id="generateMovieList" class='btn btn-success btn-large'> Generate Some Movies!! </button>
 			
 		</div>
 	</div>
