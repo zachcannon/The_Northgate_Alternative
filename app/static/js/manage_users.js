@@ -13,14 +13,12 @@ $( document ).ready(function() {
 			});
 		};
 		
-		$.post('/recommender_results', {
-			recommender: document.getElementById("recommenderstouse").value		
-		}).done(postMovieList);
+		$.post('/recommender_results').done(postMovieList);
 	});
 	
 	$('#js-test-group-one').click(function () {
 		$.post('/load_preformed_group', {
-			group: '[44,55,66]'
+			group: '[1000, 1001]'
 		});	
 	});
 

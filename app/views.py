@@ -2,6 +2,7 @@ from app import app
 from google.appengine.ext import db
 from models import RecommenderUser
 from movie_recommender import MovieRecommender
+from movie_info_display import RatingInfoGetter
 from forms import UserForm, RemoveUserForm
 from decorators import login_required
 from flask import render_template, flash, url_for, redirect, request, jsonify
@@ -22,6 +23,13 @@ def manage_users():
 		form=form,
 		remove_user_form=remove_user_form)
 
+@app.route('/get_movie_info')	
+def get_movie_info():
+	infoGetter = RatingInfoGetter()
+	movieInfo = infoGetter.get_the_info()
+	return render_template('show_movie_data.html', movieInfo = movieInfo)
+		
+		
 @app.route('/load_preformed_group', methods = ['POST'])	
 def add_preformed_group():
 	if request.method == 'POST':	
@@ -36,6 +44,7 @@ def add_preformed_group():
 		for member in group_members_list:
 			recommenderuser = RecommenderUser(username = str(member))
 			recommenderuser.put()
+		return redirect(url_for('manage_users'))
 
 @app.route('/add_recommender_user', methods = ['GET', 'POST'])
 def add_recommender_user():
@@ -63,11 +72,10 @@ def remove_user():
 @app.route('/recommender_results', methods = ['POST'])
 def group_recommend():
 	recommender_users = RecommenderUser.all()
-	recommender_to_use = request.form['recommender']
 	users_for_search = []
 	for user in recommender_users:
-		users_for_search.append(int(user.username))	
+		users_for_search.append(int(user.username))
 	recommender = MovieRecommender()
-	recommender.populate_users(users_for_search, recommender_to_use)		
+	recommender.populate_users(users_for_search)		
 	results = recommender.generate_movie_list()
 	return jsonify({'movies': results})

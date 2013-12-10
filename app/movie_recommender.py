@@ -34,11 +34,9 @@ class MovieRecommender():
 		Movie recommender class
 		'''
 		self.users_to_query = []
-		self.recommender_to_use = ''
 	
-	def populate_users(self, users, recommender):
+	def populate_users(self, users):
 		self.users_to_query = users
-		self.recommender_to_use = recommender
 		
 	def get_avg(self, user_list, movie_data):
 		groupr = {}
@@ -60,8 +58,8 @@ class MovieRecommender():
 		for r in userd:
 			luserd = luserd + userd[r]*userd[r]
 		luserd = math.sqrt(luserd)
-		delta = 0
-		closest = 0
+		delta = [0]*15
+		closest = [0]*15
 		numsame = 0
 		for other in md:
 			if other not in group:
@@ -75,23 +73,51 @@ class MovieRecommender():
 				dot = 0
 				for m in inter:
 					dot = dot + userd[m]*otherdata[m]
-				if (dot / (luserd*dother) > delta ):
-					closest = other
-					delta = dot/(luserd*dother)
-					numsame = len(inter)
+				d = dot/(luserd*dother)
+				i = 0
+				flag = True
+				for dd in delta:
+					if d > dd and flag:
+						delta.insert(i,d)
+						closest.insert(i,other)
+						delta.remove( delta[ len(delta)-1 ] )
+						closest.remove( closest[ len(closest)-1 ] )
+						flag = False
+					i = i+1
 		return closest
+		
+	def get_rec(self, otherdata, group, md):
+		user1 = otherdata[0]
+		results = {}
+		for m in user1:
+			numsame = 0
+			s = 0
+			for otheruser in otherdata:
+				if m in otheruser:
+					numsame = numsame+1
+					s = s + otheruser[m]
+				if numsame > (len(otherdata)/2):
+					avg = s / numsame
+					numseen = 0
+					for u in group:
+						if m in md[u]:
+							numseen = numseen + 1
+					if numseen <= (len(group)/3):
+						results.update( { m:avg } )
+		return results
 	
 	def generate_movie_list(self):
 		movie_data = read_data("u.data")
 		movies = read_movies("u.item")
 		
-		userd = self.get_avg(self.users_to_query, movie_data)
+		users = self.users_to_query
+		userd = self.get_avg(users, movie_data)
 		
-		other = self.find_closest_user(self.users_to_query, userd, movie_data)
-		
-		reccomend = movie_data[other]
+		other = self.find_closest_user(users, userd, movie_data)
+		otherdata = [ movie_data[other[0]] ,movie_data[other[1]] ,movie_data[other[2]]  ]
+		reccomend = self.get_rec(otherdata, users, movie_data)
 	
-		movie_list = ['Users in group', self.users_to_query, 'Recommender used',self.recommender_to_use,'Movies Recommended']
+		movie_list = []
 		i=0
 		for m in sorted(reccomend, key=reccomend.get, reverse=True):
 			movie_list.append( movies[m] )
